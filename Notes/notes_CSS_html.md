@@ -146,8 +146,6 @@
   "sd sd main main main main main main"
   "ft ft ft ft ft ft ft ft";
   border: 2px solid yellow;
-  
-
 }
 .box{
   /* width: 250px;
@@ -183,7 +181,6 @@
       name="viewport"
     />
     <link rel="stylesheet" href="style.css">
-
   </head>
 
   <body>
