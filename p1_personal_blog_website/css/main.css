@@ -6,15 +6,16 @@
   "hd hd"
   "sd main_ar"
   "ft ft";
-  border: 2px solid yellow;
+  border: 2px solid yellowgreen;
   column-gap: 10px;
   row-gap: 10px;
+  justify-content: center;
 }
 
 .header{
   grid-area: hd;
   display: flex;
-  
+  flex-direction: column;
 }
 
 .sidebar{
@@ -23,19 +24,21 @@
 
 .body_main_page{
   grid-area: main_ar;  
-  display: flex;
+  display: grid;
   flex-direction: column;
   border: 2px solid gray;
+  grid-template-rows: fit-content(50%) 1fr;
+  gap: 10px;
+
 }
 
 .footer{
   grid-area: ft;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: flex-end;
   align-items: center;
   height: 50px;
-  flex-grow: 3;
 }
 
 .social{
@@ -55,4 +58,11 @@
   display: grid;
   grid-template-rows: 50% 50%;
   grid-template-columns: 50% 50%;
+  gap: 10px;
+}
+
+.blog_thumbnail{
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
 }

@@ -83,13 +83,15 @@
   display:grid;
   /* Step 2: setup rows amd columns */
   /* grid-template-columns: repeat(3, 1fr); */
-  grid-template-columns: 300px 300px 300px;
+  grid-template-columns: repeat(3, 350px);
   grid-template-rows: 250px 600px;
+  /* grid-auto-rows: minmax(100px, auto); */
   grid-template-areas: 
   "hd hd hd hd hd hd hd hd"
   "sd sd main main main main main main"
   "ft ft ft ft ft ft ft ft";
   border: 2px solid yellow;
+  
 
 }
 .box{
@@ -144,4 +146,100 @@
 </html>
 ```
 
-## Flex and Grid together
+## Responsive Layouts
+Media Query
+```css
+@media(min-width: 900px) and (max-width: 900px){
+  .container{
+
+  }
+}
+```
+
+#### Example
+```css
+.container{
+  display:grid;
+  grid-template-columns: 300px 300px 300px;
+  grid-template-rows: 250px 600px;
+  /* grid-template-columns: repeat(3, 1fr); */
+  /* Initially each element has its own row for small screens */
+  grid-template-areas: 
+  "hd"
+  "sd"
+  "main"
+  "ft";
+  border: 2px solid yellow;
+}
+/* add css for nested grid here */
+.nestedGrid{
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 50% 50%;
+}
+.nestedGrid > *{
+  border: 2px solid aquamarine;
+}
+.box{
+    border: 1px solid red;
+    background: #F8FA9D;
+    }
+  .header{
+    /* row start/column start/ row end/ column end */
+    grid-area:hd;
+  }
+  .footer{
+    grid-area: ft;  
+  }
+  .sidebar{
+    grid-area: sd;
+  }
+  .content{
+    grid-area: main;
+  }
+/* If Screen Is Wide Enough */
+@media(min-width:900px) {
+.container{
+      display:grid;
+      grid-template-columns: 300px 300px 300px;
+      grid-template-rows: 250px 600px;
+      grid-template-areas: 
+      "hd hd hd hd hd hd hd hd"
+      "sd sd main main main main main main"
+      "ft ft ft ft ft ft ft ft";
+      border: 2px solid red;
+  }
+}
+```
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Exercise 1</title>
+    <meta
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+      name="viewport"
+    />
+    <link rel="stylesheet" href="css/style-solution.css">
+  </head>
+
+  <body>
+  <div class = "container">
+    <div class="header box">Header</div>
+    <div class="sidebar box"><h1>Blog Posts</h1><a href="post.html">Most Recent Post</a></div>
+    <div class="content box">
+      <!-- nest grid here -->
+      <div class="nestedGrid">
+        <div><h1>Thursday</h1></div>
+        <div><h1>Fall</h1></div>
+        <div><h1>Fritz</h1></div>
+        <div><h1>Dairy Free</h1></div>
+      </div>
+    </div>
+    <div class="footer box">Footer</div>
+  </div>
+  </body>
+</html>
+```
