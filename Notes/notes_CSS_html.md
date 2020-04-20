@@ -76,6 +76,8 @@
 * `vw` - units of viewport width (essentially the browser’s rendering space). Each unit is 1/100th of width
 * `vh` - the same as above but for viewport height
 
+More about units: https://www.w3schools.com/cssref/css_units.asp
+
 ## Typography
 ```css
 #typography{
