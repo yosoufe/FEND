@@ -158,56 +158,64 @@ Media Query
 
 #### Example
 ```css
-.container{
-  display:grid;
+.container {
+  display: grid;
   grid-template-columns: 300px 300px 300px;
   grid-template-rows: 250px 600px;
   /* grid-template-columns: repeat(3, 1fr); */
   /* Initially each element has its own row for small screens */
-  grid-template-areas: 
-  "hd"
-  "sd"
-  "main"
-  "ft";
+  grid-template-areas:
+    "hd"
+    "sd"
+    "main"
+    "ft";
   border: 2px solid yellow;
 }
+
 /* add css for nested grid here */
-.nestedGrid{
+.nestedGrid {
   display: grid;
   grid-template-columns: 50% 50%;
   grid-template-rows: 50% 50%;
 }
-.nestedGrid > *{
+
+.nestedGrid>* {
   border: 2px solid aquamarine;
 }
-.box{
-    border: 1px solid red;
-    background: #F8FA9D;
-    }
-  .header{
-    /* row start/column start/ row end/ column end */
-    grid-area:hd;
-  }
-  .footer{
-    grid-area: ft;  
-  }
-  .sidebar{
-    grid-area: sd;
-  }
-  .content{
-    grid-area: main;
-  }
+
+.box {
+  border: 1px solid red;
+  background: #F8FA9D;
+}
+
+.header {
+  /* row start/column start/ row end/ column end */
+  grid-area: hd;
+}
+
+.footer {
+  grid-area: ft;
+}
+
+.sidebar {
+  grid-area: sd;
+}
+
+.content {
+  grid-area: main;
+}
+
 /* If Screen Is Wide Enough */
 @media(min-width:900px) {
-.container{
-      display:grid;
-      grid-template-columns: 300px 300px 300px;
-      grid-template-rows: 250px 600px;
-      grid-template-areas: 
+  .container {
+    display: grid;
+    grid-template-columns: 300px 300px 300px;
+    grid-template-rows: 250px 600px;
+    grid-template-areas:
       "hd hd hd hd hd hd hd hd"
       "sd sd main main main main main main"
       "ft ft ft ft ft ft ft ft";
-      border: 2px solid red;
+    border: 2px solid red;
   }
 }
 ```
