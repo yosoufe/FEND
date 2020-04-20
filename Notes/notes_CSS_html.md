@@ -33,6 +33,61 @@
 </html>
 ```
 
+## Color
+```css
+#p1 {
+  background-color: #ff0000;
+}
+#p2 {
+  background-color: rgb(0, 255, 0);
+}
+#p2 {
+  background-color: yellow;
+}
+```
+
+## Box Model:
+```css
+.box{
+  width: 300px;
+  height: 500px;
+  border: 2px solid #444;
+  margin: 25px;
+  padding: 50px;
+  box-shadow: aqua;
+  /* display: none;
+  display: inline;
+  display: block;
+  display: inline-block; */
+  z-index: -1;
+  border-radius: 25px;
+}
+```
+
+## Units
+### Absolute
+* `px`
+* `in`
+* `mm`
+* `cm`
+### Relative
+* `%`
+* `em` - A unit equivalent to the current font size - if 12px font, 2em would be 24px
+* `vw` - units of viewport width (essentially the browser’s rendering space). Each unit is 1/100th of width
+* `vh` - the same as above but for viewport height
+
+## Typography
+```css
+#typography{
+  text-align: center;
+  color: yellow;
+  width: 64%;
+  margin: auto;
+  font-size: 1.1em;
+  line-height: 1.3em;
+}
+```
+
 ## Flex
 ```html
 <!DOCTYPE html>
