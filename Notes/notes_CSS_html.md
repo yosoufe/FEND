@@ -33,6 +33,30 @@
 </html>
 ```
 
+## Font
+```html
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+```
+
+```html
+<p>
+  My dog is the most <strong>important</strong> creature in my life right now.
+</p>
+
+<p>
+  We <em>have</em> to buy the latest version of the pet hair remover vacuum, the
+  floor is covered with fur!
+</p>
+```
+
+```css
+.box{
+  font-family: 'Montserrat', sans-serif;
+}
+```
+
 ## Color
 ```css
 #p1 {
@@ -105,7 +129,7 @@ More about units: https://www.w3schools.com/cssref/css_units.asp
       display: flex;
       flex-direction: column;
       /* alt solution */
-      flex-direction: column-reverse;
+      /* flex-direction: column-reverse; */
       border: 2px solid yellow;
       justify-content: center;
       align-items: center;

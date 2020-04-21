@@ -1,16 +1,25 @@
+@import "blog.css";
+
+html, body {
+  width: 99.4%;
+  height: 98.0%;
+}
+
 .main{
+  min-height: 100%;
   display: grid;
-  grid-template-columns: fit-content(50%) 1fr;
-  grid-template-rows: fit-content(8ch) fit-content(8ch) 60px;
+  width: 1fr;
+  grid-template-columns: fit-content(10%) 1fr;
+  grid-template-rows: fit-content(10%) 1fr 60px;
   grid-template-areas: 
   "hd hd"
   "sd main_ar"
   "ft ft";
-  border: 2px solid yellowgreen;
+  /* border: 2px solid yellowgreen; */
   column-gap: 10px;
   row-gap: 10px;
-  justify-content: center;
   padding: 10px;
+  /* overflow:auto; */
 }
 
 .header{
@@ -18,14 +27,28 @@
   display: flex;
   flex-direction: column;
   padding: 10px;
-  align-items: center;
+  align-items: left;
+  background-image: url('../images/headers/header3.jpg');
+  background-size: cover;
+  background-position: center;
+  color: rgb(221, 215, 207);
+}
+
+#header-title-link{
+  text-decoration: none; /* no underline */
+  color: inherit;
 }
 
 .sidebar{
   grid-area: sd;
+  display: flex;
+  flex-direction: column;
   padding: 10px;
   border: 2px solid gray;
-  border-radius: 15px;
+  column-gap: 40px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  /* row-gap: 5000px; */
 }
 
 .body_main_page{
@@ -59,24 +82,47 @@
   /* width: 250px; */
   /* height: 150px; */
   /* border: 1px solid red; */
+  border-radius: 15px;
 }
 
 .recent_blogs{
   display: grid;
-  grid-template-columns: 50% 50%;
-  grid-template-rows: 50% 50%;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
   gap: 20px;
   padding: 10px;
-  justify-content: space-evenly;
+  justify-items: center;
 }
 
-.blog_thumbnail{
+.card{
   display: flex;
-  flex-direction: row;
-  justify-content: left;
+  flex-direction: column;
+  /* justify-content: left; */
+  align-items: left;
   border-radius: 5px;
-  border: 1px solid #1e6b28;
+  /* border: 1px solid #1e6b28; */
   padding: 10px;
   width: fit-content(50%);
-  box-shadow: 5px 10px #1e6b28;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: #f1f1f1;
+  width: 40%;
 }
+
+/* .blog_list{
+  display: flex;
+  flex-direction: column;
+} */
+
+/* .blog_list p, .blog_list ul {
+  padding: 5px;
+  margin: 1px;
+} */
+
+ul{
+  padding-left: 8px;
+  line-height:normal;
+  /* margin: 0;
+  padding: 0; */
+  list-style-position: inside;
+}
+
