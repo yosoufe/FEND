@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/main.css" />
-  <title>Blog 6, My Weblog</title>
+  <title>My Weblog</title>
 </head>
+
 <body>
   <div class="main box">
     <div class="header box">
-      <h1>My First Ever Weblog</h1>
+      <h1>
+        <a id="header-title-link" href="../index.html">My First Ever Weblog</a>
+      </h1>
       <p>I am excited :)</p>
     </div>
     <div class="sidebar box">
@@ -19,7 +23,21 @@
       <div class="table_of_content">
         <div>Table of Content:</div>
         <ul>
-          <li>Hello world</li>
+          <li>
+            <a href="#introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#Requirements">Requirements</a>
+          </li>
+          <li>
+            <a href="#ros_packages">Used ROS Packages</a>
+          </li>
+          <li>
+            <a href="#mapping">Mapping</a>
+          </li>
+          <li>
+            <a href="#localization_navigation">Localization and Navigation</a>
+          </li>
         </ul>
       </div>
       <div class="blog_list box">
@@ -47,15 +65,133 @@
       </div>
     </div>
     <div class="body_main_page box">
-      <h2>Robotics Engineer ND Final Project</h2>
       <div class="blog_content_wrapper">
         <div class="blog_content">
+          <h2>Robotics Engineer ND Final Project</h2>
           <figure>
             <img src="../images/robond_final/final_results.gif" alt="Final Goal" style="width:100%">
             <figcaption>Fig 1 - Final Project</figcaption>
           </figure>
           <article>
-            Start to write some text
+            <a name="introduction"></a>
+            <h2>Introduction</h2>
+            <p>
+              I started the
+              <a href="https://www.udacity.com/course/robotics-software-engineer--nd209">Robotics Engineer Nanodgree
+              </a>
+              a year ago as a beta tester. So I during the beta testing I finished almost two projects of it. Then later
+              I was looking for an opportunity to finish it. During the COVID-19 crisis Udacity made its nanodegrees
+              free for a month so I used this opportunity to finish my Robotics nanodegree. It was a good experience.
+            </p>
+            <p>
+              I would like to write about the final project here. The final project was about using different
+              ROS packages to do mapping, localization and navigation of a simulated robot in Gazebo environment.
+              The project can be found
+              <a href="https://github.com/yosoufe/RoboNDbetaTest/tree/master/catkin_ws_home_service_robot"> here at my
+                github account</a>.
+              The animation above is showing the final results that the robot is navigating to a predefined
+              location in the map, marked with green virtual object. It picks up the object and
+              moves to another location to drop the object virtually. You can find the high quality video of the
+              final project on the YouTube video below.
+            </p>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/yLND5wDFcBc" frameborder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <a name="Requirements"></a>
+            <h2>Requirements</h2>
+            <p>
+              In order to make sure that all the required packages are installed, I used this command:
+            </p>
+            <code>sudo apt install ros-kinetic-turtlebot-*</code>
+            <p>To build the project:</p>
+            <code>cd catkin_ws_home_service_robot
+catkin_make
+source devel/setup.sh</code>
+            <p>The file structure of the project is as follow</p>
+            <code>    ├──                                # Official ROS packages
+    |
+    ├── slam_gmapping                  # gmapping_demo.launch file                   
+    │   ├── gmapping
+    │   ├── ...
+    ├── turtlebot                      # keyboard_teleop.launch file
+    │   ├── turtlebot_teleop
+    │   ├── ...
+    ├── turtlebot_interactions         # view_navigation.launch file      
+    │   ├── turtlebot_rviz_launchers
+    │   ├── ...
+    ├── turtlebot_simulator            # turtlebot_world.launch file 
+    │   ├── turtlebot_gazebo
+    │   ├── ...
+    |
+    ├── integration                    # my launch and world files to use above packages
+    │   ├── launch
+    │   ├── worlds
+    |
+    ├── maps                           # map files
+    │   ├── ...
+    ├── scripts                        # shell scripts files
+    │   ├── ...
+    ├──rvizConfigs                     # rviz configuration files
+    │   ├── ...
+    ├──pick_objects                    # pick_objects C++ node
+    │   ├── src/pick_objects_node.cpp
+    │   ├── ...
+    ├──add_markers                     # add_marker C++ node
+    │   ├── src/add_markers_node.cpp
+    │   ├── ...
+    └──</code>
+          <a name="ros_packages"></a>
+          <h2>Used ROS Packages</h2>
+          <h3>TurtleBot (Meta)Packages</h3>
+          <p>Different Turtlebot packages are being used to simulate and accomplish this project. Such as:</p>
+          <ul>
+            <li>
+              <a href="https://github.com/turtlebot/turtlebot">Turtlebot stack</a>
+            </li>
+            <li><a href="http://wiki.ros.org/turtlebot_rviz_launchers">turtlebot_rviz_launchers</a></li>
+            <li><a href="turtlebot_gazebo">http://wiki.ros.org/turtlebot_gazebo</a></li>
+          </ul>
+          <a name="mapping"></a>
+          <h2>Mapping</h2>
+          <p>
+            <a href="http://wiki.ros.org/gmapping">Gmapping package</a> is used to create the map of 
+            the environment. The created maps can 
+            be found in the <em>maps</em> directory. The <em>src/maps/map3</em> was the best map that I could create. 
+            I tried mapping with different world models and parameters for gmapping package and <em>map3</em> 
+            was the best results.
+          </p>
+          <figure>
+            <img src="../images/robond_final/map3.png" alt="Best Map" style="width:100%">
+            <figcaption>Fig 2 - Best Map I could create</figcaption>
+          </figure>
+          <p>In order to redo the mapping it is enough to do the following commands:</p>
+          <code>cd catkin_ws_home_service_robot/src/scripts
+./test_slam.sh</code>
+          <p>Now choose the xterm that is running the <em>keyboard_teleop.launch</em> and 
+            navigate the robot manually to generate the map. <em>keyboard_teleop.launch</em> 
+            is part of <em>turtlebot_teleop</em> package. To learn more, please take a look at 
+            <a href="http://wiki.ros.org/turtlebot_teleop">here</a>. When all parts of the map 
+            are covered, use the following command to save the map:
+          </p>
+          <code>rosrun map_server map_saver -f outputFile</code>
+          <a name="localization_navigation"></a>
+          <h2>Localization and Navigation</h2>
+          <p><em>test_navigation.sh</em> script is a demo of the navigation and localization. To run it:</p>
+          <code>cd catkin_ws_home_service_robot/src/scripts
+./test_navigation.sh</code>
+          <p>This script is using ROS Navigation stack and Adaptive Monte Carlo Localization 
+            (AMCL) for localization under the hood which is being included in 
+            <em></em>catkin_ws_home_service_robot/src/integration/launch/amcl_demo.launch</em> file. 
+            It is using Dijkstra's algorithm for navigation which is a variant of
+            the Uniform Cost Search algorithm, while avoiding obstacles on its path.
+          </p>
+          <p>
+            After running the script, you can use rviz to set goal location and robot 
+            should move to that selected location like the animation below:
+          </p>
+          <figure>
+            <img src="../images/robond_final/test_navigation.gif" alt="Testing Navigation" style="width:100%">
+            <figcaption>Fig 3 - Testing Navigation using RVIZ</figcaption>
+          </figure>
           </article>
         </div>
       </div>
@@ -81,4 +217,5 @@
     </div>
   </div>
 </body>
+
 </html>
