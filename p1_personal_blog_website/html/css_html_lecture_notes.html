@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/main.css" />
+  <title>My Weblog</title>
+</head>
+<body>
+  <div class="main box">
+    <div class="header box">
+      <h1>
+        <a id="clean-link" href="../index.html">My First Ever Weblog</a>
+      </h1>
+      <p>I am excited :)</p>
+    </div>
+    <div class="sidebar box">
+      <!-- A bit different from the main page sidebar
+      It should include a table of content of this weblog
+      and also some links to other weblogs -->
+      <div class="table_of_content">
+        <div>Table of Content:</div>
+        <li>
+          <a href="#introduction">Introduction</a>
+        </li>
+        <li>
+          <a href="#basics">Basics CSS and HTML</a>
+        </li>
+        <li>
+          <a href="#fonts">Fonts</a>
+        </li>
+      </div>
+      <div class="blog_list">
+        <p>List of Weblogs:</p>
+        <ul>
+          <li>
+            <a href="html/robond_final.html">Robotics Engineer ND Final Project</a>
+          </li>
+          <li>
+            <a href="html/css_html_lecture_notes.html">CSS HTML Lecture Notes</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="body_main_page box">
+      <div class="blog_content_wrapper">
+      <div class="blog_content">
+        <h2>CSS HTML Lecture Notes</h2>
+        <article>
+          <a name="introduction"></a>
+          <h2>Introduction</h2>
+          <p>
+            I am going to document some of my learnings during the FEND here. That would mostly include the 
+            mostly the code snippets that sounds important so this page would become my cheat sheet later 
+            during the web development.
+          </p>
+          <a name="basics"></a>
+          <h2>Basics CSS and HTML</h2>
+          The following code snippet shows how basic HTML file looks like and how it can be 
+          linked to a css structure or file.
+          <code>&lt!DOCTYPE html>
+&lthtml lang="en">
+  &lthead>
+    &ltmeta charset="utf-8" />
+    &lttitle>Exercise 1</title>
+    &ltmeta
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+      name="viewport"
+    />
+    &lt!-- link external style sheet -->
+    &ltlink rel="stylesheet" href="css/exercise-1.css" />
+
+  <!-- style tag -->
+  &ltstyle>
+    #test{
+      text-transform: uppercase;
+    }
+  &lt/style> 
+  &lt/head>
+
+  &ltbody>
+    &ltdiv class="container">
+      &lta href="https://google.com" target="_blank">This is a link&lt/a>
+    &lt/div>
+    
+    &lt!-- Inline CSS -->
+    &ltdiv id="test" style="font-size: 54px;"> inline style&lt/div>
+  &lt/body>
+&lt/html></code>
+        <a name="fonts"></a>
+        <h2>Fonts</h2>
+        How to choose font??
+        <code>&lthead>
+  &ltlink href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+&lt/head></code>
+        <p>Inline Emphasizes:</p>
+        <code>&ltp>
+  My dog is the most &ltstrong>important&lt/strong> creature in my life right now.
+&lt/p>
+
+&ltp>
+  We &ltem>have&lt/em> to buy the latest version of the pet hair remover vacuum, the
+  floor is covered with fur!
+&lt/p></code>
+        <p>More is coming in future.</p>
+        </article>
+        <div class="blog_navigation">
+          <button><a id="clean-link" href="../index.html">Home</a></button>
+          <button><a id="clean-link" href="robond_final.html">Next Blog</a></button>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="footer box">
+      <div class="social">
+        <div>
+          <a href="https://github.com/yosoufe" target="_blank">
+            <img src="../images/icons/github.svg" alt="Github" height="30">
+          </a>
+        </div>
+        <div>
+          <a href="https://twitter.com/yosoufe" target="_blank">
+            <img src="../images/icons/twitter.png" alt="Twitter" height="30">
+          </a>
+        </div>
+        <div>
+          <a href="https://www.instagram.com/yousof_ebn/" target="_blank">
+            <img src="../images/icons/instagram.svg" alt="Instagram" height="30">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,4 +1,7 @@
 @import "blog.css";
+@import "header.css";
+@import "footer.css";
+
 
 html, body {
   width: 99.4%;
@@ -9,7 +12,7 @@ html, body {
   min-height: 100%;
   display: grid;
   width: 1fr;
-  grid-template-columns: fit-content(10%) 1fr;
+  grid-template-columns: fit-content(20%) 1fr;
   grid-template-rows: fit-content(10%) 1fr 60px;
   grid-template-areas: 
   "hd hd"
@@ -20,23 +23,6 @@ html, body {
   row-gap: 10px;
   padding: 10px;
   /* overflow:auto; */
-}
-
-.header{
-  grid-area: hd;
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  align-items: left;
-  background-image: url('../images/headers/header3.jpg');
-  background-size: cover;
-  background-position: center;
-  color: rgb(221, 215, 207);
-}
-
-#header-title-link{
-  text-decoration: none; /* no underline */
-  color: inherit;
 }
 
 .sidebar{
@@ -62,21 +48,7 @@ html, body {
   padding: 10px;
 }
 
-.footer{
-  grid-area: ft;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-  height: 50px;
-}
 
-.social{
-  display: flex;
-  width: 250px;
-  flex-direction: row;
-  justify-content: space-evenly;
-}
 
 .box{
   /* width: 250px; */

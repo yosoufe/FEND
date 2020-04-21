@@ -1,0 +1,16 @@
+.header{
+  grid-area: hd;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  align-items: left;
+  background-image: url('../images/headers/header3.jpg');
+  background-size: cover;
+  background-position: center;
+  color: rgb(221, 215, 207);
+}
+
+#clean-link{
+  text-decoration: none; /* no underline */
+  color: inherit;
+}

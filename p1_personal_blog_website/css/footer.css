@@ -1,0 +1,15 @@
+.footer{
+  grid-area: ft;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  height: 50px;
+}
+
+.social{
+  display: flex;
+  width: 250px;
+  flex-direction: row;
+  justify-content: space-evenly;
+}

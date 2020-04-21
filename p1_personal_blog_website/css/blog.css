@@ -1,9 +1,12 @@
 .table_of_content{
-  /* display: flex;
-  border-radius: 0px;
+  display: flex;
+  flex-direction: column;
+  
+  /* border-radius: 0px;
   flex-direction: column;
   padding: 5px; */
   border-bottom: 4px solid black;
+  width:100%; /* for border */
 }
 
 figcaption{
@@ -32,4 +35,13 @@ code{
   background-color: rgba(184, 184, 184, 0.438);
   padding: 10px;
   border-radius: 15px;
+}
+
+.blog_navigation{
+  display: flex;
+  flex-direction: row ;
+}
+
+.blog_navigation button{
+  margin: 15px;
 }
