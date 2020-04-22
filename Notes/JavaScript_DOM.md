@@ -1,0 +1,513 @@
+# JavaScript and DOM
+
+## Syntax
+
+### `let` and `const` (and `var`)
+`var` is "hoisted" but let and const are not and they are scoped to block rather than function.
+`let` can be reassigned but not redeclared in the same scope.
+Variables declared with `const` must be assigned an initial value, but can’t be redeclared in the same scope, and can’t be reassigned.
+
+Is there any reason to use `var` anymore? Not really.
+
+### Template Literal
+Given 
+```js
+const student = {
+  name: 'Richard Kalehoff',
+  guardian: 'Mr. Kalehoff'
+};
+
+const teacher = {
+  name: 'Mrs. Wilson',
+  room: 'N231'
+}
+```
+```js
+let message = student.name + ' please see ' + teacher.name + ' in ' + teacher.room + ' to pick up your report card.';
+```
+
+will become
+```js
+let message = `${student.name} please see ${teacher.name} in ${teacher.room} to pick up your report card.`;
+```
+
+and about multiline examples:
+```js
+let message = `${student.name} 
+  
+  please see ${teacher.name} in ${teacher.room} 
+  to pick up your report card.`;
+```
+
+Example of how useful it is:
+```js
+/*
+ * Programming Quiz: Build an HTML Fragment (1-2)
+ */
+
+const cheetah = {
+    name: 'Cheetah',
+    scientificName: 'Acinonyx jubatus',
+    lifespan: '10-12 years',
+    speed: '68-75 mph',
+    diet: 'carnivore',
+    summary: 'Fastest mammal on land, the cheetah can reach speeds of 60 or perhaps even 70 miles (97 or 113 kilometers) an hour over short distances. It usually chases its prey at only about half that speed, however. After a chase, a cheetah needs half an hour to catch its breath before it can eat.',
+    fact: 'Cheetahs have “tear marks” that run from the inside corners of their eyes down to the outside edges of their mouth.'
+};
+
+// creates an animal trading card
+function createAnimalTradingCardHTML(animal) {
+    const cardHTML = `<div class="card">
+        <h3 class="name">' ${animal.name} </h3>
+        <img src="${animal.name}.jpg" alt="${animal.name}" class="picture">
+        <div class="description">
+            <p class="fact"> ${animal.fact} </p>
+            <ul class="details">
+                <li><span class="bold">Scientific Name</span>: ${animal.scientificName} </li>
+                <li><span class="bold">Average Lifespan</span>: ${animal.lifespan}</li>'
+                <li><span class="bold">Average Speed</span>: ${animal.speed}</li>
+                <li><span class="bold">Diet</span>: ${animal.diet}</li>
+            </ul>
+            <p class="brief">${animal.summary}</p>
+        </div>
+    </div>`;
+
+    return cardHTML;
+}
+```
+
+### Destructing
+In ES6, you can extract data from arrays and objects into distinct variables using destructuring
+```js
+const point = [10, 25, -34];
+
+const x = point[0];
+const y = point[1];
+const z = point[2];
+
+console.log(x, y, z);
+```
+```js
+const gemstone = {
+  type: 'quartz',
+  color: 'rose',
+  carat: 21.29
+};
+
+const type = gemstone.type;
+const color = gemstone.color;
+const carat = gemstone.carat;
+
+console.log(type, color, carat);
+```
+
+**Destructuring** borrows inspiration from languages like Perl and Python by allowing you to specify the elements you want to extract from an array or object on the left side of an assignment. 
+```js
+// Array Destructuring
+const point = [10, 25, -34];
+
+const [x, y, z] = point;
+
+console.log(x, y, z);
+// Prints: 10 25 -34
+```
+In this example, the brackets `[ ]` represent the array being destructured
+
+```js
+// Object Destructuring
+const gemstone = {
+  type: 'quartz',
+  color: 'rose',
+  carat: 21.29
+};
+
+const {type, color, carat} = gemstone;
+
+console.log(type, color, carat);
+// Prints: quartz rose 21.29
+```
+In this example, the curly braces `{ }` represent the object being destructured 
+
+and to ignore some elements in between
+```js
+const things = ['red', 'basketball', 'paperclip', 'green', 'computer', 'earth', 'udacity', 'blue', 'dogs'];
+const [one, , , two, , , , three] = things;
+```
+
+### Object literal shorthand
+```js
+// old style of copy
+{
+  let type = 'quartz';
+  let color = 'rose';
+  let carat = 21.29;
+  const gemstone = {
+    type: type,
+    color: color,
+    carat: carat
+  };
+  console.log(gemstone);
+}
+
+// new style: of object copy
+{
+  let type = 'quartz';
+  let color = 'rose';
+  let carat = 21.29;
+
+  const gemstone = {type, color, carat};
+  console.log(gemstone);
+}
+```
+
+shorthand way to add methods to objects
+```js
+// old style:
+{
+  let type = 'quartz';
+  let color = 'rose';
+  let carat = 21.29;
+
+  const gemstone = {
+    type,
+    color,
+    carat,
+    calculateWorth: function() {
+      // will calculate worth of gemstone based on type, color, and carat
+    }
+  };
+}
+
+//new style
+{
+  let gemstone = {
+    type,
+    color,
+    carat,
+    calculateWorth() { ... }
+  };
+}
+```
+
+### Family of For Loops
+The `for...of` loop is the most recent addition to the family of for loops in JavaScript.
+
+#### The for loop
+```js
+const digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+for (let i = 0; i < digits.length; i++) {
+  console.log(digits[i]);
+}
+```
+
+#### The for...in loop
+```js
+const digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+for (const index in digits) {
+  console.log(digits[index]);
+}
+```
+Also, the `for...in` loop can get you into big trouble when you need to add an extra method to an array (or another object). Because for...in loops loop over all enumerable properties, this means if you add any additional properties to the array's prototype, then those properties will also appear in the loop.
+```js
+Array.prototype.decimalfy = function() {
+  for (let i = 0; i < this.length; i++) {
+    this[i] = this[i].toFixed(2);
+  }
+};
+
+const digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+for (const index in digits) {
+  console.log(digits[index]);
+}
+```
+```
+ Prints:
+ 0
+ 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+ function() {
+  for (let i = 0; i < this.length; i++) {
+   this[i] = this[i].toFixed(2);
+  }
+ }
+```
+
+#### For...of loop
+The **for...of loop** is used to loop over any type of data that is *iterable*.
+```js
+const digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+for (const digit of digits) {
+  console.log(digit);
+}
+```
+
+But wait, there’s more! The for...of loop also has some additional benefits that fix the weaknesses of the for and for...in loops.
+
+You can stop or break a for...of loop at anytime.
+
+```js
+const digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+for (const digit of digits) {
+  if (digit % 2 === 0) {
+    continue;
+  }
+  console.log(digit);
+}
+```
+
+And you don’t have to worry about adding new properties to objects. The for...of loop will only loop over the values in the object.
+
+Exercise:
+```js
+/*
+ * Programming Quiz: Writing a For...of Loop (1-4)
+ */
+
+const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+
+// your code goes here
+for (const day of days){
+    var upperDay = day.charAt(0).toUpperCase() + day.slice(1);
+    console.log(upperDay);
+}
+```
+
+### Spread... operator
+The spread operator, written with three consecutive dots (`...`), is new in ES6 and gives you the ability to expand, or spread, iterable objects into multiple elements.
+
+```js
+const books = ["Don Quixote", "The Hobbit", "Alice in Wonderland", "Tale of Two Cities"];
+console.log(...books);
+// Prints: Don Quixote The Hobbit Alice in Wonderland Tale of Two Cities
+
+const primes = new Set([2, 3, 5, 7, 11, 13, 17, 19, 23, 29]);
+console.log(...primes);
+// Prints: 2 3 5 7 11 13 17 19 23 29
+```
+
+Combining arrays with concat
+
+```js
+// old style
+{
+  const fruits = ["apples", "bananas", "pears"];
+  const vegetables = ["corn", "potatoes", "carrots"];
+  const produce = fruits.concat(vegetables);
+  console.log(produce);
+  // Prints: ["apples", "bananas", "pears", "corn", "potatoes", "carrots"]
+}
+
+// new style
+{
+  const produce = [fruits, vegetables];
+  console.log(produce);
+  // Prints: [Array[3], Array[3]]
+  // did not work
+}
+
+// correct new style
+{
+  const produce = [...fruits, ...vegetables];
+  console.log(produce);
+  // Prints: [ 'apples', 'bananas', 'pears', 'corn', 'potatoes', 'carrots' ]
+}
+```
+
+### ...Rest parameter
+If you can use the spread operator to spread an array into multiple elements, then certainly there should be a way to bundle multiple elements back into an array, right?
+```js
+const order = [20.17, 18.67, 1.50, "cheese", "eggs", "milk", "bread"];
+const [total, subtotal, tax, ...items] = order;
+console.log(total, subtotal, tax, items);
+// Prints: 20.17 18.67 1.5 ["cheese", "eggs", "milk", "bread"]
+```
+
+#### Variadic functions
+Another use case for the rest parameter is when you’re working with variadic functions. Variadic functions are functions that take an indefinite number of arguments.
+
+#### Using the arguments object
+In previous versions of JavaScript, this type of function would be handled using the arguments object. The arguments object is an array-like object that is available as a local variable inside all functions. It contains a value for each argument being passed to the function starting at 0 for the first argument, 1 for the second argument, and so on.
+
+```js
+function sum() {
+  let total = 0;  
+  for(const argument of arguments) {
+    total += argument;
+  }
+  return total;
+}
+```
+Now this works fine, but it does have its issues:
+
+1. If you look at the definition for the sum() function, it doesn’t have any parameters.
+   * This is misleading because we know the sum() function can handle an indefinite amount of arguments.
+2. It can be hard to understand.
+   * If you’ve never used the arguments object before, then you would most likely look at this code and wonder where the arguments object is even coming from. Did it appear out of thin air? It certainly looks that way.
+
+#### Using the rest parameter
+```js
+function sum(...nums) {
+  let total = 0;  
+  for(const num of nums) {
+    total += num;
+  }
+  return total;
+}
+```
+
+example:
+```js
+/*
+ * Programming Quiz: Using the Rest Parameter (1-5)
+ */
+function average(...nums) {
+    let sum = 0;
+    for (let num of nums)
+    {
+        sum = sum + num;
+    }
+    n = nums.length;
+    if (n===0){
+        return 0;
+    }
+    return sum / n;
+    
+}
+
+console.log(average(2, 6));
+console.log(average(2, 3, 3, 5, 7, 10));
+console.log(average(7, 1432, 12, 13, 100));
+console.log(average());
+```
+
+## Functions
+## Built-ins
+## Developer-Fu
+
+What happened to aboves. They are again skipped???
+
+## The Document Object Model (DOM)
+The words "the DOM" are used all over developer documentation sites and tutorials on writing interactive JavaScript code.
+> a tree structure that captures the content and properties of the HTML and all the relationships between the nodes
+
+> the DOM is the full, parsed representation of the HTML
+
+> Remember that a JavaScript object is a tree-like structure that has properties and values. So the DOM can be accessed using a special object provided by the browser: `document`
+
+The DOM is standardized by the W3C. There are a number of specifications that make up the DOM, here are few:
+* Core Specification
+* Events Specification
+* Style Specification
+* Validation Specification
+* Load and Save Specification
+To see the full list of DOM specs, check out the standard at: https://www.w3.org/standards/techs/dom#w3c_all
+
+Recap:
+The DOM is not part of the JavaScript language.
+
+The DOM is constructed from the browser is globally accessible by JavaScript code using the document object.
+
+Extra Resources: 
+* https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction
+* https://www.w3.org/TR/html5/syntax.html#parsing
+* https://www.w3.org/standards/techs/dom#w3c_all
+* https://www.ecma-international.org/ecma-262/#sec-global-object
+
+
+### Select An Element By ID
+```js
+document.getElementById();
+
+// for example
+document.getElementById('footer');
+```
+
+docs: 
+* https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById
+
+
+### Selecting Multiple Elements At Once
+
+```
+document.getElementsByClassName('brand-color');
+document.getElementsByTagName('p');
+```
+
+docs:
+* https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByClassName
+* https://developer.mozilla.org/en-US/docs/Web/API/Element/getElementsByTagName
+
+**What is Returened?**
+returns an array-like data structure of elements. HTML Collections.
+
+### The `Node` Interface
+docs: https://developer.mozilla.org/en-US/docs/Web/API/Node
+
+### Element Interface
+docs: https://developer.mozilla.org/en-US/docs/Web/API/Element
+
+One really important thing about the Element Interface is that it is a descendent of the Node Interface. The Element Interface inherits all of the Node Interface's properties and methods. 
+
+More Docs for Web API: https://developer.mozilla.org/en-US/docs/Web/API
+
+## jQuery library
+Thankfully, all browsers have pretty much aligned to support the official standard.
+
+However, back in the day, that wasn't the case. You had to write different code to perform the same action in different browsers. Then you had to write code to check which browser you were in to run the correct code for that browser. Let me tell you, it was a bit of a nightmare.
+
+Several JavaScript libraries came along to help mitigate these issues. Let's take a brief look at the jQuery library.
+
+https://jquery.com/
+
+New DOM has been created by jQuery.
+
+### The querySelector Method
+Returns single element.
+```js
+// find and return the element with an ID of "header"
+document.querySelector('#header');
+
+// find and return the first element with the class "header"
+document.querySelector('.header');
+
+// find and return the first <header> element
+document.querySelector('header');
+```
+
+docs: https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector
+
+### The querySelectorAll Method
+returns all elements in form of node lists.
+```js
+// find and return a list of elements with the class "header"
+document.querySelectorAll('.header');
+
+// find and return a list of <header> elements
+document.querySelectorAll('header');
+```
+
+To iterate
+```js
+const allHeaders = document.querySelectorAll('header');
+
+for(let i = 0; i < allHeaders.length; i++){
+    console.dir(allHeaders[i]);
+}
+```
+
+docs: https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll
+
+## Creating Content with JavaScript
+
