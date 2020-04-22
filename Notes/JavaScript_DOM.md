@@ -511,3 +511,201 @@ docs: https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll
 
 ## Creating Content with JavaScript
 
+### An Element's Inner HTML
+`.innerHTML`  property, as it's rightly named, represents the markup of the element's content. We can use this property to:
+
+* get an element's (and all of its descendants!) HTML content
+* set an element's HTML content
+
+It returns a string
+
+`.outerHTML` represents the HTML element itself, as well as its children.
+
+### An Element's Text Content
+So `.innerHTML` will get/set an element's HTML content. If we just want the text content, we can use the fantastically named `.textContent` property!
+
+The `.textContent` property will:
+* set the text content of an element and all its descendants
+* return the text content of an element and all its descendants
+
+* `.textContent` reflects the html
+* `.innerText` reflects the visualization and also css styling
+
+As you saw, `.innerText` will get the visible text of the element. This is an important distinction! If CSS is used to hide any text inside that element, `.innerText` will not return that text, while `.textContent` will return it. And it's not just the hiding/showing nature of CSS that `.innerText` adheres to, `.innerText` will also honor changes to things like capitalization.
+
+Docs:
+* https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
+* https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent
+* https://developer.mozilla.org/en-US/docs/Web/API/Node/innerText
+
+Extra Resources:
+* http://perfectionkills.com/the-poor-misunderstood-innerText/
+* https://kellegous.com/j/2013/02/27/innertext-vs-textcontent/
+
+### createElement:
+docs: https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement
+
+```js
+// creates and returns a <span> element
+document.createElement('span');
+// creates and returns an <h3> element
+document.createElement('h3');
+```
+
+### **Adding Content To The Page**
+```js
+// create a brand new <span> element
+const newSpan = document.createElement('span');
+newSpan.textContent=" Hello there"
+
+// select the first (main) heading of the page
+const mainHeading = document.querySelector('h1');
+
+// add the <span> element as the last child element of the main heading
+mainHeading.appendChild(newSpan);
+```
+
+`.appendChild` docs: https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild
+
+
+#### Creating Text Nodes
+create new text nodes using the `.createTextNode()` method. Take a look at the following code that:
+
+* creates a paragraph element
+* creates a text node
+* appends the text node to the paragraph
+* appends the paragraph to the tag
+
+```js
+const myPara = document.createElement('p');
+const textOfParagraph = document.createTextNode('I am the text for the paragraph!');
+
+myPara.appendChild(textOfParagraph);
+document.body.appendChild(myPara);
+```
+
+**Inserting HTML In Other Locations**
+Enter the `.insertAdjacentHTML()` method! The `.insertAdjacentHTML()` method has to be called with two arguments:
+
+* the location of the HTML
+* the HTML text that is going to be inserted
+
+The first argument to this method will let us insert the new HTML in one of four different locations
+
+* beforebegin – inserts the HTML text as a previous sibling
+* afterbegin – inserts the HTML text as the first child
+* beforeend – inserts the HTML text as the last child
+* afterend – inserts the HTML text as a following sibling
+
+```html
+<!-- beforebegin -->
+<p>
+    <!-- afterbegin -->
+    Existing text/HTML content
+    <!-- beforeend -->
+</p>
+<!-- afterend -->
+```
+
+```js
+const mainHeading = document.querySelector('#main-heading');
+const htmlTextToAdd = '<h2>Skydiving is fun!</h2>';
+
+mainHeading.insertAdjacentHTML('afterend', htmlTextToAdd);
+```
+docs: https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML
+
+### Removing Elements
+
+* `.removeChild()` https://developer.mozilla.org/en-US/docs/Web/API/Node/removeChild
+* `.remove()` 
+```js
+<parent-element>.removeChild(<child-to-remove>);
+```
+
+To get child elements:
+* `.firstElementChild` To get the first element and ignore texts.
+* `.firstChild` To get the first child even text.
+
+`removeChild` like `appendChild` needs access to parent element. There
+is a better solution: 
+* `.parentElement`
+
+```js
+const mainHeading = document.querySelector('h1');
+mainHeading.parentElement.removeChild(mainHeading);
+```
+
+```js
+const mainHeading = document.querySelector('h1');
+mainHeading.remove();
+```
+* `.remove()` https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/remove
+
+### Style Page Content
+we can access an element's `style` attribute using the `.style` property!
+```js
+const mainHeading = document.querySelector('h1');
+
+mainHeading.style.color = 'red';
+```
+`style` docs: https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style
+
+#### Adding Multiple Styles At Once
+```js
+const mainHeading = document.querySelector('h1');
+mainHeading.style.cssText = 'color: blue; background-color: orange; font-size: 3.5em';
+```
+
+#### Setting An Element's Attributes
+```js
+const mainHeading = document.querySelector('h1');
+mainHeading.setAttribute('style', 'color: blue; background-color: orange; font-size: 3.5em;');
+```
+
+```js
+const mainHeading = document.querySelector('h1');
+
+// add an ID to the heading's sibling element
+mainHeading.nextElementSibling.setAttribute('id', 'heading-sibling');
+
+// use the newly added ID to access that element
+document.querySelector('#heading-sibling').style.backgroundColor = 'red';
+```
+
+#### Accessing an Element's Classes
+```js
+const mainHeading = document.querySelector('#main-heading');
+
+// store the list of classes in a variable
+const listOfClasses = mainHeading.className;
+
+// to convert list of strings to array of strings
+const arrayOfClasses = listOfClasses.split(' ');
+
+// logs out the string "ank-student jpk-modal"
+console.log(listOfClasses);
+```
+
+The `.classList` Property, returns a `DOMTokenLists`. 
+Docs: https://developer.mozilla.org/en-US/docs/Web/API/Element/classList
+```js
+const mainHeading = document.querySelector('#main-heading');
+
+// store the list of classes in a variable
+const listOfClasses = mainHeading.classList;
+
+// logs out ["ank-student", "jpk-modal"]
+console.log(listOfClasses);
+```
+`.classList`'s properties:
+* `.add()` - to add a class to the list
+* `.remove()` - to remove a class from the list
+* `.toggle()` - to add the class if it doesn't exists or remove it from the list if it does already exist
+* `.contains()` - returns a boolean based on if the class exists in the list or not
+
+## Include js file into html
+before closing the `body` tag?
+```html
+<script src="app.js"></script>
+```
