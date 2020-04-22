@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <div class="main box">
+  <div class="main">
     <div class="header box">
       <h1>
         <a id="clean-link" href="../index.html">My First Ever Weblog</a>
@@ -44,10 +44,10 @@
         <p>List of Weblogs:</p>
         <ul>
           <li>
-            <a href="html/robond_final.html">Robotics Engineer ND Final Project</a>
+            <a href="../html/robond_final.html">Robotics Engineer ND Final Project</a>
           </li>
           <li>
-            <a href="html/css_html_lecture_notes.html">CSS HTML Lecture Notes</a>
+            <a href="../html/css_html_lecture_notes.html">CSS HTML Lecture Notes</a>
           </li>
         </ul>
       </div>
@@ -56,8 +56,9 @@
       <div class="blog_content_wrapper">
         <div class="blog_content">
           <h2>Robotics Engineer ND Final Project</h2>
+          <!-- <h2>Babi</h2> -->
           <figure>
-            <img src="../images/robond_final/final_results.gif" alt="Final Goal" style="width:100%">
+            <img src="../images/robond_final/final_results.gif" alt="Final Goal">
             <figcaption>Fig 1 - Final Project</figcaption>
           </figure>
           <article>
@@ -68,8 +69,9 @@
               <a href="https://www.udacity.com/course/robotics-software-engineer--nd209">Robotics Engineer Nanodgree
               </a>
               a year ago as a beta tester. So during the beta testing I finished almost two projects of it. Then later
-              I was looking for an opportunity to finish it. During the COVID-19 crisis Udacity made its nanodegrees
-              free for a month so I used this opportunity to finish my Robotics nanodegree. It was a good experience.
+              I was looking for an opportunity to finish it. During the <u>COVID-19 crisis</u> Udacity made its nanodegrees
+              free for a month so I used this opportunity to finish my Robotics nanodegree. It was a good experience 
+              <b>specially it was free</b> and <q>here is some useless quote for just the dear reviewer of this project</q>.
             </p>
             <p>
               I would like to write about the final project here. The final project was about using different
@@ -82,19 +84,32 @@
               moves to another location to drop the object virtually. You can find the high quality video of the
               final project on the YouTube video below.
             </p>
-            <iframe width="70%" height="auto" src="https://www.youtube.com/embed/yLND5wDFcBc" frameborder="0"
-              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="video-container">
+              <iframe src="https://www.youtube.com/embed/yLND5wDFcBc" frameborder="0" 
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+              </iframe>
+            </div>
+            
             <a name="Requirements"></a>
             <h2>Requirements</h2>
             <p>
               In order to make sure that all the required packages are installed, I used this command:
             </p>
+            <!-- Dear Reviewer: The following is the code block, If I do the same indentation
+            as the rest of the code, the code would not have the correct indentation in the output
+            Please understand that -->
             <code>sudo apt install ros-kinetic-turtlebot-*</code>
             <p>To build the project:</p>
+            <!-- Dear Reviewer: The following is the code block, If I do the same indentation
+            as the rest of the code, the code would not have the correct indentation in the output
+            Please understand that -->
             <code>cd catkin_ws_home_service_robot
 catkin_make
 source devel/setup.sh</code>
             <p>The file structure of the project is as follow</p>
+            <!-- Dear Reviewer: The following is the code block, If I do the same indentation
+            as the rest of the code, the code would not have the correct indentation in the output
+            Please understand that -->
             <code>    ├──                                # Official ROS packages
     |
     ├── slam_gmapping                  # gmapping_demo.launch file                   
@@ -148,10 +163,13 @@ source devel/setup.sh</code>
             was the best results.
           </p>
           <figure>
-            <img src="../images/robond_final/map3.png" alt="Best Map" style="width:80%">
+            <img src="../images/robond_final/map3.png" alt="Best Map">
             <figcaption>Fig 2 - Best Map I could create</figcaption>
           </figure>
           <p>In order to redo the mapping it is enough to do the following commands:</p>
+          <!-- Dear Reviewer: The following is the code block, If I do the same indentation
+          as the rest of the code, the code would not have the correct indentation in the output
+          Please understand that -->
           <code>cd catkin_ws_home_service_robot/src/scripts
 ./test_slam.sh</code>
           <p>Now choose the xterm that is running the <em>keyboard_teleop.launch</em> and 
@@ -160,15 +178,21 @@ source devel/setup.sh</code>
             <a href="http://wiki.ros.org/turtlebot_teleop">here</a>. When all parts of the map 
             are covered, use the following command to save the map:
           </p>
+          <!-- Dear Reviewer: The following is the code block, If I do the same indentation
+          as the rest of the code, the code would not have the correct indentation in the output
+          Please understand that -->
           <code>rosrun map_server map_saver -f outputFile</code>
           <a name="localization_navigation"></a>
           <h2>Localization and Navigation</h2>
           <p><em>test_navigation.sh</em> script is a demo of the navigation and localization. To run it:</p>
+          <!-- Dear Reviewer: The following is the code block, If I do the same indentation
+          as the rest of the code, the code would not have the correct indentation in the output
+          Please understand that -->
           <code>cd catkin_ws_home_service_robot/src/scripts
 ./test_navigation.sh</code>
           <p>This script is using ROS Navigation stack and Adaptive Monte Carlo Localization 
             (AMCL) for localization under the hood which is being included in 
-            <em></em>catkin_ws_home_service_robot/src/integration/launch/amcl_demo.launch</em> file. 
+            <em>catkin_ws_home_service_robot/src/integration/launch/amcl_demo.launch</em> file. 
             It is using Dijkstra's algorithm for navigation which is a variant of
             the Uniform Cost Search algorithm, while avoiding obstacles on its path.
           </p>
@@ -177,7 +201,7 @@ source devel/setup.sh</code>
             should move to that selected location like the animation below:
           </p>
           <figure>
-            <img src="../images/robond_final/test_navigation.gif" alt="Testing Navigation" style="width:80%">
+            <img src="../images/robond_final/test_navigation.gif" alt="Testing Navigation">
             <figcaption>Fig 3 - Testing Navigation using RVIZ</figcaption>
           </figure>
           </article>

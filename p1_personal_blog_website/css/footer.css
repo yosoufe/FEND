@@ -9,7 +9,12 @@
 
 .social{
   display: flex;
-  width: 250px;
+  width: 120px;
   flex-direction: row;
   justify-content: space-evenly;
+}
+
+#social_img{
+  width: 30px;
+  height: 30px;
 }
