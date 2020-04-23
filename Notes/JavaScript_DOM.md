@@ -911,3 +911,32 @@ setTimeout(function sayHi() {
     console.log('Howdy');
 }, 1000); // number of milliseconds
 ```
+If we ran this code, the string 'Howdy' would appear in the console in about 1,000 milliseconds or in just about 1 second.
+
+#### setTimeout() with Delay of 0
+This technique can help us to convert potentially long-running code to one that's broken up to allow for the browser to handle user interactions!
+
+#### Break Up Long-Running Code
+```js
+let count = 1
+
+function generateParagraphs() {
+    const fragment = document.createDocumentFragment();
+
+    for (let i = 1; i <= 500; i++) {
+        const newElement = document.createElement('p');
+        newElement.textContent = 'This is paragraph number ' + count;
+        count = count + 1;
+
+        fragment.appendChild(newElement);
+    }
+
+    document.body.appendChild(fragment);
+
+    if (count < 20000) {
+        setTimeout(generateParagraphs, 0);
+    }
+}
+
+generateParagraphs();
+```
