@@ -452,7 +452,7 @@ docs:
 **What is Returened?**
 returns an array-like data structure of elements. HTML Collections.
 
-### The `Node` Interface
+### Node Interface
 docs: https://developer.mozilla.org/en-US/docs/Web/API/Node
 
 ### Element Interface
@@ -708,4 +708,206 @@ console.log(listOfClasses);
 before closing the `body` tag?
 ```html
 <script src="app.js"></script>
+```
+
+## Working with Browser Events
+
+### Seeing An Event
+On Chrome: https://developers.google.com/web/tools/chrome-devtools/console/events#monitor_events.
+For development purpose only.
+```js
+// start displaying all events on the document object
+monitorEvents(document);
+
+// turn off the displaying of all events on the document object.
+unmonitorEvents(document);
+```
+
+### EventTarget Interface
+EventTarget is an interface implemented by objects that can receive events and may have listeners for them. and
+Element, document, and window are the most common event targets, but other objects can be event targets too…
+
+Docs: https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
+
+### Adding An Event Listener
+```js
+<event-target>.addEventListener(<event-to-listen-for>, <function-to-run-when-an-event-happens>);
+```
+```js
+const mainHeading = document.querySelector('h1');
+
+mainHeading.addEventListener('click', function () {
+  console.log('The heading was clicked!');
+});
+```
+docs: https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
+
+list of events: https://developer.mozilla.org/en-US/docs/Web/Events
+
+
+### Remove An Event Listener
+```js
+<event-target>.removeEventListener(<event-to-listen-for>, <function-to-remove>);
+```
+
+```js
+function myEventListeningFunction() {
+    console.log('howdy');
+}
+
+// adds a listener for clicks, to run the `myEventListeningFunction` function
+document.addEventListener('click', myEventListeningFunction);
+
+// immediately removes the click listener that should run the `myEventListeningFunction` function
+document.removeEventListener('click', myEventListeningFunction);
+```
+
+### Event Phases
+* the **capturing** phase
+* the **at target** phase
+* and the **bubbling** phase
+
+### The Event Object
+When an event occurs, the browser includes an event object. This is just a regular JavaScript object that includes a ton of information about the event itself.  the `.addEventListener()'s` listener function receives a notification (an object that implements the `Event interface`) when an event of the specified type occurs
+
+
+```js
+document.addEventListener('click', function(event){
+  console.log(event)
+})
+```
+
+### The Default Action
+```js
+const links = document.querySelectorAll('a');
+const thirdLink = links[2];
+
+thirdLink.addEventListener('click', function (event) {
+    event.preventDefault();
+    console.log("Look, ma! We didn't navigate to a new page!");
+});
+```
+
+### Event Delegation
+The event object has a `.target` property.
+```js
+const myCustomDiv = document.createElement('div');
+
+function respondToTheClick(evt) {
+    console.log('A paragraph was clicked: ' + evt.target.textContent);
+}
+
+for (let i = 1; i <= 200; i++) {
+    const newElement = document.createElement('p');
+    newElement.textContent = 'This is paragraph number ' + i;
+
+    myCustomDiv.appendChild(newElement);
+}
+
+document.body.appendChild(myCustomDiv);
+
+myCustomDiv.addEventListener('click', respondToTheClick);
+```
+
+#### Checking the Node Type in Event Delegation
+```js
+document.querySelector('#content').addEventListener('click', function (evt) {
+    if (evt.target.nodeName === 'SPAN') {  // ← verifies target is desired element
+        console.log('A span was clicked with text ' + evt.target.textContent);
+    }
+});
+```
+
+### The Content Is Loaded Event
+```js
+document.addEventListener('DOMContentLoaded', function () {
+    console.log('the DOM is ready to be interacted with!');
+});
+```
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+          document.querySelector('footer').style.backgroundColor = 'purple';
+      });
+    </script>
+```
+
+It would be better to move the code to the bottom of the HTML file just before the closing`</body>` tag.
+
+docs: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
+
+## Performance
+```js
+const myCustomDiv = document.createElement('div');
+
+for (let i = 1; i <= 200; i++) {
+  const newElement = document.createElement('p');
+  newElement.innerText = 'This is paragraph number ' + i;
+
+  myCustomDiv.appendChild(newElement);
+}
+
+document.body.appendChild(myCustomDiv);
+```
+### Testing Code Performance
+`performance.now()` returns a timestamp that is measured in milliseconds.
+
+docs: https://developer.mozilla.org/en-US/docs/Web/API/Performance/now
+
+
+### Using a Document Fragment
+
+DocumentFragment represents a minimal document object that has no parent. It is used as a lightweight version of Document that stores a segment of a document structure comprised of nodes just like a standard document.
+
+The key difference is that because the document fragment isn't part of the active document tree structure, changes made to the fragment don't affect the document, cause reflow, or incur any performance impact that can occur when changes are made.
+
+```js
+const fragment = document.createDocumentFragment();  // ← uses a DocumentFragment instead of a <div>
+
+for (let i = 0; i < 200; i++) {
+    const newElement = document.createElement('p');
+    newElement.innerText = 'This is paragraph number ' + i;
+
+    fragment.appendChild(newElement);
+}
+
+document.body.appendChild(fragment); // reflow and repaint here -- once!
+```
+
+### Reflow and Repaint
+`Reflow` is the process of the browser laying out the page. It happens when you first display the DOM (generally after the DOM and CSS have been loaded), and happens again every time something could change the layout. This is a fairly expensive (slow) process.
+
+`Repaint` happens after reflow as the browser draws the new layout to the screen. This is fairly quick, but you still want to limit how often it happens.
+
+In general, if you have to make a group of changes, hide/change all/show is a great pattern to use if the changes are relatively contained.
+
+#### Virtual DOM
+By the way, this is why React and other "virtual DOM" libraries are so popular. You don't make changes to the DOM, but make changes to another structure (a "virtual DOM") and the library calculates the best way to update the screen to match.
+
+### Single Threading
+JavaScript is **single-threaded**.
+
+### Code Synchronicity
+However, there is some code that is not synchronous - meaning that the code is written just like any other code, but it is executed at some later point in time.
+```js
+const links = document.querySelectorAll('input');
+const thirdField = links[2];
+
+thirdField.addEventListener('keypress', function handleKeyPresses(event) {
+    console.log('a key was pressed');
+});
+```
+
+The key things to remember here are 1) current synchronous code runs to completion, and 2) events are processed when the browser isn't busy. Asynchronous code (such as loading an image) runs outside of this loop and sends an event when it is done.
+
+### setTimeout
+```js
+setTimeout(function sayHi() {
+    console.log('Howdy');
+}, 1000); // number of milliseconds
 ```
