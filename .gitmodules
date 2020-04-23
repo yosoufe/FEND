@@ -1,0 +1,3 @@
+[submodule "projects_starting_point"]
+	path = projects_starting_point
+	url = https://github.com/udacity/fend.git
