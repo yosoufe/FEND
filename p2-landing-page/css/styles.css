@@ -98,6 +98,8 @@ section {
     font-size: 1.5em;
      /* top right bottom left */
     margin: 0.5em 0.8em 0.5em 0.8em;
+    /*change the mouse to pointer when hovering on top of navigation*/
+    cursor: pointer;
 }
 
 /* Navigation Toggle */
