@@ -138,6 +138,7 @@ section {
     position: relative;
 }
 
+/* Hamburger Navigator Graphics */
 .nav-toggle-label span::before,
 .nav-toggle-label span::after{
     content: '';
@@ -152,6 +153,13 @@ section {
     top: 7px;
 }
 
+.navbar__menu a{
+    text-decoration: none;
+    color: inherit;
+    opacity: 0;
+    transition: opacity 150ms ease-in-out;
+}
+
 .navbar__menu .menu__link {
     display: block;
     padding: 1em;
@@ -164,13 +172,6 @@ section {
     background: #333;
     color: #fff;
     transition: ease 0.3s all;
-}
-
-.navbar__menu a{
-    text-decoration: none;
-    color: inherit;
-    opacity: 0;
-    transition: opacity 150ms ease-in-out;
 }
 
 /* Header Styles */
