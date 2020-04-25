@@ -168,6 +168,7 @@ section {
     color: #000;
 }
 
+
 .navbar__menu .menu__link:hover {
     background: #333;
     color: #fff;
@@ -185,6 +186,37 @@ section {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-end; */
+}
+
+@media only screen and (min-width: 35em){
+    .nav-toggle-label{
+        display: none;
+    }
+
+    .page__header{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+
+    .navbar__menu{
+        all: unset;
+        display: block;
+    }
+
+    .navbar__menu a{
+        all: unset;
+        color: black;
+    }
+
+    .navbar__menu ul{
+        all: unset;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin: 0;
+        list-style: none;
+    }
 }
 
 /* Footer Styles */
