@@ -33,11 +33,9 @@ function listening(){
 
 app.get('/data', function(req,res){
   res.send(projectData);
-  console.log(`GET Received, resp: ${JSON.stringify(projectData)}.`);
 });
 
 app.post('/addData', function(req, res){
   projectData.push(req.body);
-  console.log(projectData);
-  // res.send("Hi there\n");
+  res.send({});
 });
