@@ -33,9 +33,11 @@ function listening(){
 
 app.get('/data', function(req,res){
   res.send(projectData);
+  console.log('GET request received');
 });
 
 app.post('/addData', function(req, res){
   projectData.push(req.body);
   res.send({});
+  console.log('POST request received');
 });
