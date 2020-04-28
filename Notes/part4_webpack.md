@@ -364,4 +364,73 @@ export {
 }
 ```
 
-Now the webserver works but `npm run starts` does not. Why? webpack-dev-server does not rebuild the `main.js` 
+Now the webserver works but `npm run starts` does not. Why? webpack-dev-server does not rebuild the `main.js`
+
+## WebPack for Production:
+Compressing data
+
+`MiniCssExtractPlugin` to extract inline styles to make the web page faster. It also comes with scss loader.
+
+```
+npm install mini-css-extract-plugin
+npm install optimize-css-assets-webpack-plugin
+npm install terser-webpack-plugin
+```
+
+```js
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+
+// ...
+// 
+module.exports = {
+  optimization: {
+    minimizer: [new TerserPlugin({}), new OptimizeCSSAssetsPlugin({})],
+  }
+  module: {
+    rules: [
+      {
+        test: /\.scss$/,
+        use: [ MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader' ]
+      }
+    ]
+  },
+  plugins: [
+    new MiniCssExtractPlugin({filename: '[name].css'})
+  ]
+}
+```
+
+Run webpack in prod mode again
+
+## Service Workers:
+* Runs in background between app and internet to offer push-notification or offline mode or ...
+
+Google Workbox makes working with basic Service Workers incredibly convenient.
+
+So, we do our three steps:
+* Install the plugin: `npm install workbox-webpack-plugin --save-dev`
+* Require the plugin in prod: `const WorkboxPlugin = require('workbox-webpack-plugin');`
+* Add the plugin: `new WorkboxPlugin.GenerateSW()`
+
+We are going to add service workers to prod, because to allow offline access, what the service workers actually do is create a cached version of your website that they can supply if the server can’t be reached. But we don’t want that caching around our dev site, so we won’t add this to our dev config at all.
+
+If you follow along with the documentation, there’s one more step. We need to register a Service Worker with our app. To do this, we will add a script to our html file and call the register service worker function if the browser supports service workers.
+
+Add this code to the bottom of your html file, just above the closing body tag.
+
+```html
+<script>
+    // Check that service workers are supported
+    if ('serviceWorker' in navigator) {
+        // Use the window load event to keep the page load performant
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/service-worker.js');
+        });
+    }
+</script>
+```
+
+Tutorials: https://codelabs.developers.google.com/codelabs/workbox-lab/#0
+
