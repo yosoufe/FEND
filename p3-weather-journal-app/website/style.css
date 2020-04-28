@@ -3,27 +3,26 @@
 }
 
 body{
-    background: #fffff8;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #35adf296;
     margin: 0;
     padding: 0;
+    font-size: 20px;
+}
+
+.headline {
+    background-color: rgb(0, 38, 255);
+    color: #f0d43a;
+    padding: 10px;
 }
 
 #app{
     display: grid;
     grid-auto-rows: min-content;
-    /* grid-template-columns:  */
-    /* compensate 10px margin + 10px padding */
-    min-height: calc(100vh - 20px); 
-    min-width: calc(100vw - 20px);
-    background: #35adf296;
     color: #f0d43a;
     justify-content: center;
     align-items: center;
     grid-gap: 1em;
-    font-size: 20px;
-    padding: 10px;
-    margin: 10px;
     font-family: 'Oswald', sans-serif;
 }
 
@@ -36,33 +35,35 @@ body{
 
 .entry{
     background: rgba(59, 74, 107, .4);
-}
-
-#entryHolder{
-    display: block;
-    height: ;
-}
-
-#date{
-    height: 1em;
-}
-
-#temp{
-    height: 1em;
-}
-
-#content{
-    height: 3em;
-}
-
-.headline {
-    background-color: rgb(0, 38, 255);
-    width: 1fr;
+    padding: 10px;
 }
 
 .title{
-
+    display: flex;
+    width: 100%;
+    justify-content: center;
 }
+
+#entryHolder{
+    display: flex;
+    flex-direction: column;
+    align-content: start;
+    width: 100%;
+}
+
+#date,
+#temp{
+    display: inline-block;
+    height: 1.5em;
+}
+
+#content{
+    /* display: inline-block; */
+    white-space: pre-wrap;
+    height:calc(1.5em * 9);
+    width: 100%;
+}
+
 
 /*  Basic Styling To Override Default For Basic HTML Elements */
 label{
@@ -79,17 +80,19 @@ input{
     font-size: 20px;
     font-family: 'Oswald', sans-serif;
     border: none;
+    padding: 10px;
 }
 
 button{
-    width: 400px;
-    height: 100px;
+    width: 120px;
+    height: 80px;
     background: #3b4a6b;
     color: #f0d43a;
     font-size: 26px;
     font-family: 'Oswald', sans-serif;
     border: none;
     box-shadow: 2px 4px 5px #444;
+    margin: 10px;
 }
 h1{
     font-size: 36px;
@@ -100,6 +103,7 @@ textarea{
     color: #f0d43a;
     font-size: 20px;
     font-family: 'Oswald', sans-serif;
+    padding: 10px;
 }
 /* Reset style for HTML element on active to have no border*/
 input:focus,
