@@ -271,3 +271,74 @@ nav {
   }
 }
 ```
+
+## Variables
+css variables: https://css-tricks.com/css-custom-properties-theming/
+
+sass variables:
+```scss
+$font-stack: Helvetica, sans-serif;
+$primary-color: #333;
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+```
+
+it becomes the following in css
+```css
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+```
+
+## Ampersand
+```scss
+button.cta{
+  &:hover{ //hovered button
+
+  }
+  &:visited{ // visited buttom
+
+  }
+
+  &.custom_class{ // button that is also custom class
+
+  }
+}
+```
+
+## WebPack and Sass
+installing loader
+```
+npm i -D style-loader node-sass css-loader sass-loader
+```
+
+loader rule:
+```js
+{
+  test: /\.scss$/,
+  use: [ 'style-loader', 'css-loader', 'sass-loader' ]
+}
+```
+
+`use` means there are bunch of loaders that are chained and input of one is the going to be passed to the other as input. **They run from right to left**.
+
+
+
+There are three things you have to do to use webpack loaders. You have to:
+
+1. install the loader
+2. call the loader in the webpack config while targeting the correct file extensions
+3. require the files in index.js
+
+So, to fix that, let’s go to client/index.js.
+
+Because of css-loader, we can add some lines like this:
+
+```js
+import './styles/resets.scss'
+```
+
