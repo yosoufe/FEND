@@ -139,5 +139,56 @@ npm i -D html-webpack-plugin
 ```
 and then the plugin needs to be added to webpack config file
 ```js
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebPackPlugin = require('html-webpack-plugin'); // reference to plugin
 
+module.exports = {
+  // changing the default folder of entry
+  // from here webpack starts to build the dependency tree
+  entry: `./src/client/index.js`, 
+  module: {
+    rules: [
+      {
+        // loader to be able to use es6 in browser side
+        test: '/\.js$/',
+        exclude: /node_modules/,
+        loader: "babel-loader"
+      }
+    ]
+  },
+  plugins:[
+    // plugin to copy html files into dist folder
+    // it also adds the js file into the html file in the dis folder
+    new HtmlWebPackPlugin({
+      template: "./src/client/views/index.html",
+      filename: "./index.html"
+    })
+  ]
+};
+```
+
+## Build Mode:
+One of the awesome features of webpack, is that it lets us apply configurations to our code based on the environment we are running. We can create a development environment (MODE in webpack) and run totally different loaders and plugins than we do for production mode.
+
+Two way of setting mode:
+* with CLI
+* in config file by adding the `mode` section
+```js
+module.exports = {
+  mode: 'production', // development, testing , ...
+  // changing the default folder of entry
+  // from here webpack starts to build the dependency tree
+  entry: `./src/client/index.js`, 
+  module: { ...
+```
+
+Second config file for separating development and production is easier.??
+
+Now two different build commands are needed to use two separate config files in the `package.json` file like:
+```json 
+  "scripts": {
+    "build-prod": "webpack --config webpack.prod.js",
+    "build-dev": "webpack-dev-server  --config webpack.dev.js --open"
+  },
 ```
