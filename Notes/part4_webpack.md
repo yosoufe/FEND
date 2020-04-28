@@ -342,3 +342,26 @@ Because of css-loader, we can add some lines like this:
 import './styles/resets.scss'
 ```
 
+# Final Touches
+About IIFE: https://developer.mozilla.org/en-US/docs/Glossary/IIFE
+
+To fix we need to add `output` to webpack config file
+```js
+module.exports = {
+  output: {
+    libraryTarget: `var`,
+    library: `Client`
+  }
+};
+```
+Now are js code is going to become a library called `Client`.
+
+We need to export js file into client library by adding the following to `client/index.js`:
+```js
+export {
+  checkForName,
+  handleSubmit
+}
+```
+
+Now the webserver works but `npm run starts` does not. Why? webpack-dev-server does not rebuild the `main.js` 
