@@ -189,6 +189,53 @@ Now two different build commands are needed to use two separate config files in 
 ```json 
   "scripts": {
     "build-prod": "webpack --config webpack.prod.js",
+    "build-dev": "webpack  --config webpack.dev.js"
+  },
+```
+
+## Webpack dev server:
+To create server for development only and it allows to run files and updates immediately. It is detecting and watching the changes on files. It can be executed by adding `--watch` to the cli like:
+```
+webpack --config webpack.dev.js --watch --info-verbosity verbose
+```
+Now webpack never exits and watches the files.
+
+Cool but still need to refresh the browser to see the changes. To avoid that `webpack-dev-server` is coming to help.
+
+First to install
+```
+npm i -D  webpack-dev-server
+```
+
+then adding to `package.json` file like this
+```json 
+  "scripts": {
+    "build-prod": "webpack --config webpack.prod.js",
     "build-dev": "webpack-dev-server  --config webpack.dev.js --open"
   },
+```
+`--open` causes to open the webpage on browser by running the command.
+
+## Clean plugin
+By default, this plugin will remove all files inside webpack's output.path directory, as well as all unused webpack assets after every successful rebuild.
+
+```
+npm i -D clean-webpack-plugin
+```
+
+to add to webpack config file
+```
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+```
+and the following in the plugin section
+```js
+        new CleanWebpackPlugin({
+                // Simulate the removal of files
+                dry: true,
+                // Write Logs to Console
+                verbose: true,
+                // Automatically remove all unused webpack assets on rebuild
+                cleanStaleWebpackAssets: true,
+                protectWebpackAssets: false
+        })
 ```
