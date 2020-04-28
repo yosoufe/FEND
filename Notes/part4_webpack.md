@@ -131,4 +131,13 @@ Different Loaders: https://webpack.js.org/loaders/
 We will visit a few more loaders later, but for now, just notice how they work. The `rules` array will contain all of our loaders, each loader specifies what types of files it will run on by running a regex matcher - in the case above we are looking for all .js files - the `$` at the end simply means that nothing comes after that.
 
 ## Plugins
+While loaders are used to transform certain types of modules, plugins can be leveraged to perform a wider range of tasks like bundle optimization, asset management and injection of environment variables.
 
+First the pluging needs to be installed via terminal
+```
+npm i -D html-webpack-plugin
+```
+and then the plugin needs to be added to webpack config file
+```js
+
+```
