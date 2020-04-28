@@ -244,3 +244,30 @@ and the following in the plugin section
 ```
 npm install --save-dev webpack-bundle-analyzer
 ```
+
+
+# Sass
+Sass is a better css.
+
+Browser does not know Sass.
+
+Sass docs: https://sass-lang.com/guide
+
+## Sass Nesting
+```scss
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li { display: inline-block; }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+}
+```

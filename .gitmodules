@@ -4,3 +4,6 @@
 [submodule "fend-webpack-content"]
 	path = fend-webpack-content
 	url = git@github.com:yosoufe/fend-webpack-content.git
+[submodule "fend-webpack-sass"]
+	path = fend-webpack-sass
+	url = git@github.com:yosoufe/fend-webpack-sass.git
