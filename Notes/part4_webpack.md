@@ -239,3 +239,8 @@ and the following in the plugin section
                 protectWebpackAssets: false
         })
 ```
+
+## bundle analyzer
+```
+npm install --save-dev webpack-bundle-analyzer
+```
