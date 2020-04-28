@@ -1,3 +1,6 @@
 [submodule "projects_starting_point"]
 	path = projects_starting_point
 	url = https://github.com/udacity/fend.git
+[submodule "fend-webpack-content"]
+	path = fend-webpack-content
+	url = git@github.com:yosoufe/fend-webpack-content.git

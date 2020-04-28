@@ -13,7 +13,6 @@ async function fetch_weather_data(zip_code){
     fetched_data = await fetch(get_url);
     if (fetched_data.ok){
       const json_data = await fetched_data.json();
-      await sleep(1000);
       res = json_data["main"];
       res["city"] = json_data["name"];
       return res;
@@ -100,7 +99,7 @@ async function main(){
     await post_data_to_server(data_to_send_to_server);
   }
   server_data = await retrieve_server_data();
-  update_ui(server_data[server_data.length - 1]);
+  update_ui(server_data);
 }
 
 
