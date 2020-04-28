@@ -434,3 +434,9 @@ Add this code to the bottom of your html file, just above the closing body tag.
 
 Tutorials: https://codelabs.developers.google.com/codelabs/workbox-lab/#0
 
+
+## Extra Resource :
+* Code splitting/lazy loading (spoiler - they're the same thing in webpack) https://webpack.js.org/guides/code-splitting/
+* Tree shaking or dead code elimination https://webpack.js.org/guides/tree-shaking/
+* A list of plugins and tutorials for more webpack fun https://github.com/markerikson/react-redux-links/blob/master/webpack-advanced-techniques.md
+* If you want to hear someone who works for Webpack explain webpack, here’s a video https://www.netlify.com/blog/2017/01/03/4-key-concepts-of-webpack/
