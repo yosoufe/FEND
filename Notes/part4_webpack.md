@@ -354,7 +354,7 @@ module.exports = {
   }
 };
 ```
-Now are js code is going to become a library called `Client`.
+Now all our js code is going into a library called `Client`.
 
 We need to export js file into client library by adding the following to `client/index.js`:
 ```js
@@ -363,6 +363,11 @@ export {
   handleSubmit
 }
 ```
+Now they should be used like
+```html
+<input type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)" onsubmit="return Client.handleSubmit(event)">
+```
+in `index.html` file. Focusing on `Client.handleSubmit`.
 
 Now the webserver works but `npm run starts` does not. Why? webpack-dev-server does not rebuild the `main.js`
 
