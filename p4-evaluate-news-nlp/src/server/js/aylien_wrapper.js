@@ -66,6 +66,7 @@ function sentiment_analysis(input_text, input_mode = 'tweet') {
   })
 }
 
+// https://stackoverflow.com/questions/38296667/getting-unexpected-token-export
 module.exports = {
   textapi: textapi,
   classify_url: classify_url,

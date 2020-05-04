@@ -37,9 +37,8 @@ test('classify_text', function (done) {
 });
 
 test('sentiment_analysis_text', async () => {
-  //const aylien_wrapper = init_aylien_wrapper_test();
-  console.log(require('./aylien_wrapper'));
-  //var response = await aylien_wrapper.sentiment_analysis('John is a very good football player');
-  //expect(response).not.toBe(null);
-  //console.log(response);
+  const aylien_wrapper = init_aylien_wrapper_test();
+  var response = await aylien_wrapper.sentiment_analysis('John is a very good football player');
+  expect(response).not.toBe(null);
+  console.log(response);
 });
