@@ -23,10 +23,6 @@ async function fetch_weather_data(zip_code){
     console.warn(err);
   }
   return null;
-  // res = {"coord":{"lon":-121.89,"lat":37.34},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}],"base":"stations","main":{"temp":12.7,"feels_like":9.3,"temp_min":11.11,"temp_max":14.44,"pressure":1020,"humidity":50},"visibility":16093,"wind":{"speed":2.6,"deg":10},"clouds":{"all":1},"dt":1587971831,"sys":{"type":1,"id":5845,"country":"US","sunrise":1587993385,"sunset":1588042411},"timezone":-25200,"id":5392171,"name":"San Jose","cod":200}
-  // res2 = res["main"];
-  // res2["city"]=res["name"];
-  // return res2;
 }
 
 /* To POST the weather and user data to server */

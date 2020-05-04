@@ -20,16 +20,22 @@
   <main>
     <section>
       <form class="" onsubmit="return Client.handleSubmit(event)">
-        <input id="name" type="text" name="input" value="" onblur="onBlur()" placeholder="Name">
-        <input type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)"
+        <!-- onblur="Client.onBlur()"  -->
+        <input id="input_string" type="text" name="input" value="" placeholder="Enter Text">
+        <input type="submit" name="" value="Submit Text" onclick="return Client.handleSubmit(event)"
           onsubmit="return Client.handleSubmit(event)">
       </form>
-      <section>
-
-        <section>
-          <strong>Form Results:</strong>
-          <div id="results"></div>
-        </section>
+      <form class="" onsubmit="return Client.handleSubmit(event)">
+        <input id="input_url" type="url" name="input" value="" placeholder="Enter URL">
+        <input type="submit" name="" value="Submit URL" >
+        <input type="submit" name="" value="Submit URL" onclick="return Client.handleSubmit(event)"
+        onsubmit="return Client.handleSubmit(event)">
+      </form>
+    </section>
+    <section>
+      <strong>Form Results:</strong>
+      <div id="results"></div>
+    </section>
   </main>
 
   <footer>
