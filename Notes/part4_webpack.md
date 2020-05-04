@@ -72,7 +72,7 @@ module.exports = {
 npm run build
 ```
 
-`npm i -D @babel/core @babel/preset-env babel-loader` to install babel to make importing possible in client side (browser). `-D` stands for development dependency.
+`npm i -D @babel/core @babel/preset-env babel-loader` to install babel to make importing possible in client side (browser). `-D` stands for development dependency. Babel translates different version of javascript to a version that browser understands. like ES6 to ES5.
 
 `.babelrc` file is needed as babel configuration. like:  `{ ‘presets’: ['@babel/preset-env'] }`
 
