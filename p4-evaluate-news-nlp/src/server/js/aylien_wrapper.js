@@ -66,8 +66,9 @@ function sentiment_analysis(input_text, input_mode = 'tweet') {
   })
 }
 
-export {
-  classify_url,
-  classify_text,
-  sentiment_analysis
+module.exports = {
+  textapi: textapi,
+  classify_url: classify_url,
+  classify_text: classify_text,
+  sentiment_analysis: sentiment_analysis
 }
