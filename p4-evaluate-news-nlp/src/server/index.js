@@ -1,9 +1,16 @@
 var path = require('path');
 const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 const mockAPIResponse = require('./js/mockAPI.js');
 const aylien_wrapper = require('./js/aylien_wrapper');
 
 const app = express();
+
+/* Middleware*/
+//Here we are configuring express to use body-parser as middle-ware.
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.use(express.static('dist'));
 
@@ -24,30 +31,37 @@ app.get('/test', function (req, res) {
 
 
 /**
- * Expects a request like:
+ * Expects a request body of like:
  * {
  *  text: "You are fantastic",
  *  mode: "tweet"
  * }
  */
-app.get('/sentiment_text', async function (req, res) {
+app.post('/sentiment_text', async function (req, res) {
   // Create information for sending request to NLP API
-  var input_text = req.text;
+  var input_text = req.body.text;
   var input_mode;
-  if (mode in req) {
-    input_mode = req.mode;
+  if ("mode" in req.body) {
+    input_mode = req.body.mode;
   } else {
     input_mode = 'tweet';
   };
 
-  console.log(req);
-  res.send({});
+  var response2 = {
+    "polarity": 'negative',
+    "subjectivity": 'subjective',
+    "text": 'This nanodegree is not describing everything very well. I am getting headache as a totally beginner',
+    "polarity_confidence": 0.9668886661529541,
+    "subjectivity_confidence": 1
+  }
 
   // request from the NLP API
-  // try {
-  //   response = await aylien_wrapper.sentiment_analysis(input_text, input_mode);
-  //   res.send(response);
-  // } catch (error) {
-  //   res.send(error);
-  // }
+  try {
+    var response = await aylien_wrapper.sentiment_analysis(input_text, input_mode);
+    console.log(response);
+    res.send(JSON.stringify(response));
+  } catch (error) {
+    // console.log(error);
+    res.send(JSON.stringify(error));
+  }
 });

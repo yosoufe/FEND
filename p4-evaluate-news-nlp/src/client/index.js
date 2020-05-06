@@ -1,4 +1,4 @@
-import { handleSubmit } from './js/formHandler'
+import { handleSubmit, sentiment_analysis_get } from './js/formHandler'
 
 import './styles/resets.scss'
 import './styles/base.scss'
@@ -6,9 +6,7 @@ import './styles/footer.scss'
 import './styles/form.scss'
 import './styles/header.scss'
 
-
-console.log(handleSubmit);
-
 export{
-  handleSubmit
+  handleSubmit,
+  sentiment_analysis_get
 }
