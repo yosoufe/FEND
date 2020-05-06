@@ -2,7 +2,7 @@
 // for async/await tests
 import 'regenerator-runtime/runtime'
 // import {sentiment_analysis} from './aylien_wrapper'
-const aylien_wrapper =  require('./aylien_wrapper');
+// const aylien_wrapper =  require('./aylien_wrapper');
 
 function init_aylien_wrapper_test() {
   return require('./aylien_wrapper');

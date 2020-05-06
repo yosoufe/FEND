@@ -40,11 +40,14 @@ app.get('/sentiment_text', async function (req, res) {
     input_mode = 'tweet';
   };
 
+  console.log(req);
+  res.send({});
+
   // request from the NLP API
-  try {
-    response = await aylien_wrapper.sentiment_analysis(input_text, input_mode);
-    res.send(response);
-  } catch (error) {
-    res.send(error);
-  }
+  // try {
+  //   response = await aylien_wrapper.sentiment_analysis(input_text, input_mode);
+  //   res.send(response);
+  // } catch (error) {
+  //   res.send(error);
+  // }
 });
