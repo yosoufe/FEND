@@ -23,17 +23,14 @@ app.get('/test', function (req, res) {
 })
 
 
-
-
-
 /**
  * Expects a request like:
  * {
- *  text: "I am good",
+ *  text: "You are fantastic",
  *  mode: "tweet"
  * }
  */
-app.get('/sentiment_text', function (req, res) {
+app.get('/sentiment_text', async function (req, res) {
   // Create information for sending request to NLP API
   var input_text = req.text;
   var input_mode;
@@ -44,13 +41,10 @@ app.get('/sentiment_text', function (req, res) {
   };
 
   // request from the NLP API
-  aylien_wrapper.sentiment_analysis(input_text,
-    function (error, response) {
-      if (error === null)
-      {
-        // send response back to client
-        res.send(response);
-      }
-    },
-    input_mode);
+  try {
+    response = await aylien_wrapper.sentiment_analysis(input_text, input_mode);
+    res.send(response);
+  } catch (error) {
+    res.send(error);
+  }
 });
