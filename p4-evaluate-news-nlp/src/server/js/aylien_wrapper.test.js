@@ -6,37 +6,29 @@ function init_aylien_wrapper_test() {
   return require('./aylien_wrapper');
 }
 
-
 test('test aylien_wrapper env variables', () => {
   const aylien_wrapper = init_aylien_wrapper_test();
   expect(process.env.API_ID).not.toBeUndefined();
   expect(process.env.API_KEY).not.toBeUndefined();
 });
 
-
-test('classify_url', function (done) {
+test('server_sentiment_analysis_text', async () => {
   const aylien_wrapper = init_aylien_wrapper_test();
-  aylien_wrapper.classify_url('http://techcrunch.com/2015/07/16/microsoft-will-never-give-up-on-mobile',
-    function (error, response) {
-      expect(error).toBe(null);
-      expect(response).not.toBe(null);
-      done(); // jest specific
-    });
+  var data = {
+    text: "some text",
+    mode: "tweet" 
+  }
+  var response = await aylien_wrapper.sentiment_analysis(data);
+  expect(response).not.toBe(null);
+  console.log(response);
 });
 
-test('classify_text', function (done) {
+test('server_sentiment_analysis_url', async () => {
   const aylien_wrapper = init_aylien_wrapper_test();
-  aylien_wrapper.classify_text('You are a good boy!',
-    function (error, response) {
-      expect(error).toBe(null);
-      expect(response).not.toBe(null);
-      done(); // jest specific
-    });
-});
-
-test('sentiment_analysis_text', async () => {
-  const aylien_wrapper = init_aylien_wrapper_test();
-  var response = await aylien_wrapper.sentiment_analysis('John is a very good football player');
+  var data = {
+    url: "https://docs.aylien.com/textapi/endpoints/#traversing-taxonomies"
+  }
+  var response = await aylien_wrapper.sentiment_analysis(data);
   expect(response).not.toBe(null);
   console.log(response);
 });

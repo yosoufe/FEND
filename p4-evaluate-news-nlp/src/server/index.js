@@ -21,8 +21,8 @@ app.get('/', function (req, res) {
 })
 
 // designates what port the app will listen to for incoming requests
-app.listen(8081, function () {
-  console.log('Example app listening on port 8081!');
+app.listen(8080, function () {
+  console.log('Example app listening on port 8080!');
 })
 
 app.get('/test', function (req, res) {
@@ -37,27 +37,13 @@ app.get('/test', function (req, res) {
  *  mode: "tweet"
  * }
  */
-app.post('/sentiment_text', async function (req, res) {
+app.post('/sentiment_analysis', async function (req, res) {
   // Create information for sending request to NLP API
-  var input_text = req.body.text;
-  var input_mode;
-  if ("mode" in req.body) {
-    input_mode = req.body.mode;
-  } else {
-    input_mode = 'tweet';
-  };
-
-  var response2 = {
-    "polarity": 'negative',
-    "subjectivity": 'subjective',
-    "text": 'This nanodegree is not describing everything very well. I am getting headache as a totally beginner',
-    "polarity_confidence": 0.9668886661529541,
-    "subjectivity_confidence": 1
-  }
+  var data = req.body;
 
   // request from the NLP API
   try {
-    var response = await aylien_wrapper.sentiment_analysis(input_text, input_mode);
+    var response = await aylien_wrapper.sentiment_analysis(data);
     console.log(response);
     res.send(JSON.stringify(response));
   } catch (error) {

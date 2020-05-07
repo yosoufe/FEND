@@ -7,33 +7,6 @@ const textapi = new aylien({
   application_key: process.env.API_KEY
 });
 
-/**
- * Callback when request is done
- * 
- * @callback aylien_request_done_callback
- * @param {*} error - An error if happened otherwise null
- * @param {*} response - the response
- */
-
-/**
- * @param {string} input_url - A url to classify
- * @param {aylien_request_done_callback} callback 
- */
-function classify_url(input_url, callback) {
-  textapi.classify({
-    url: input_url
-  }, callback);
-}
-
-/**
- * @param {string} input_text 
- * @param {aylien_request_done_callback} callback 
- */
-function classify_text(input_text, callback) {
-  textapi.classify({
-    text: input_text
-  }, callback);
-}
 
 /**
  * Sentiment analyse.
@@ -47,16 +20,23 @@ function classify_text(input_text, callback) {
  *   subjectivity_confidence: 0.9963778207617525
  * }
  * 
- * @param {string} input_text The input text
- * @param {string} input_mode mode, `tweet` or `document`
+ * input data should look in one of these forms
+ * {
+ *  text: "some text",
+ *  mode: "tweet" or "document" // This is optional field, default is tweet
+ * }
+ * 
+ * or
+ * {
+ *  url: "https://docs.aylien.com/textapi/endpoints/#traversing-taxonomies"
+ * }
+ * 
+ * @param {object} data The input data
  * @returns {Promise} that the resolve would have the response
  */
-function sentiment_analysis(input_text, input_mode = 'tweet') {
+function sentiment_analysis(data) {
   return new Promise((resolve, reject) => {
-    textapi.sentiment({
-      text: input_text,
-      mode: input_mode
-    }, (error, response) => {
+    textapi.sentiment(data, (error, response) => {
       if (error === null) {
         resolve(response);
       } else {
@@ -69,7 +49,5 @@ function sentiment_analysis(input_text, input_mode = 'tweet') {
 // https://stackoverflow.com/questions/38296667/getting-unexpected-token-export
 module.exports = {
   textapi: textapi,
-  classify_url: classify_url,
-  classify_text: classify_text,
   sentiment_analysis: sentiment_analysis
 }

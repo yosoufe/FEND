@@ -1,35 +1,58 @@
-async function handleSubmit(event) {
-  event.preventDefault()
-
+async function handleSubmitText(event) {
+  event.preventDefault();
   // check what text was put into the form field
-  let formText = document.getElementById('input_string').value
+  var formTextField = document.getElementById('input_string');
+  var formText = formTextField.value;
+  if (!formTextField.validity.valid || formText === "" ){
+    // wrong url format
+    return;
+  }
 
-  // console.log("::: Form Submitted :::")
-  // fetch('http://localhost:8081/test')
-  //   .then(res => res.json())
-  //   .then(function (res) {
-  //     document.getElementById('results').innerHTML = res.message
-  //   })
-  var response = await sentiment_analysis_get(formText);
+  var response = await sentiment_analysis_get(formText, 'text');
   document.getElementById('results').innerHTML = JSON.stringify(response);
 }
 
-async function sentiment_analysis_get(input_text) {
-  var base_url = "http://localhost:8081/sentiment_text";
-  var data = {
-    text: input_text
+async function handleSubmitUrl(event) {
+  event.preventDefault();
+
+  // check what text was put into the form field
+  var formUrlField = document.getElementById('input_url')
+  var formUrl = formUrlField.value
+  if (!formUrlField.validity.valid || formUrl === "" ){
+    // wrong url format
+    return;
   }
-  var response = await fetch(base_url, {
-    method: 'POST',
-    credentials: 'same-origin',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(data)
-  });
-  response = await response.json();
+  var response = await sentiment_analysis_get(formUrl, 'url');
+  document.getElementById('results').innerHTML = JSON.stringify(response);
+}
+
+
+async function sentiment_analysis_get(input_text, input_type) {
+  var base_url = "http://localhost:8080/sentiment_analysis";
+  var data;
+  if (input_type === 'url' || input_type === 'text'){
+    data = {};
+    data[input_type] = input_text;
+  } else {
+    throw TypeError("input_type should be url or text.");
+  }
+  var response;
+  try{
+    response = await fetch(base_url, {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(data)
+    });
+    response = await response.json();
+  } catch (error){
+    console.warn(error);
+  }
   return response;
 }
 
 export {
-  handleSubmit,
+  handleSubmitText,
+  handleSubmitUrl,
   sentiment_analysis_get
 }

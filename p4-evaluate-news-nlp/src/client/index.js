@@ -1,4 +1,4 @@
-import { handleSubmit, sentiment_analysis_get } from './js/formHandler'
+import { handleSubmitText, handleSubmitUrl, sentiment_analysis_get } from './js/formHandler'
 
 import './styles/resets.scss'
 import './styles/base.scss'
@@ -7,6 +7,7 @@ import './styles/form.scss'
 import './styles/header.scss'
 
 export{
-  handleSubmit,
+  handleSubmitText,
+  handleSubmitUrl,
   sentiment_analysis_get
 }
