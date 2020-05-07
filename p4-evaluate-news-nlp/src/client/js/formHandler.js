@@ -2,12 +2,12 @@ async function handleSubmitText(event) {
   event.preventDefault();
   // check what text was put into the form field
   var formTextField = document.getElementById('input_string');
-  var formText = formTextField.value;
-  if (!formTextField.validity.valid || formText === "" ){
-    // wrong url format
+  if (!Client.validate_input_field(formTextField)){
+    // wrong text
     return;
   }
-
+  
+  var formText = formTextField.value;
   var response = await sentiment_analysis_get(formText, 'text');
   document.getElementById('results').innerHTML = JSON.stringify(response);
 }
@@ -17,11 +17,11 @@ async function handleSubmitUrl(event) {
 
   // check what text was put into the form field
   var formUrlField = document.getElementById('input_url')
-  var formUrl = formUrlField.value
-  if (!formUrlField.validity.valid || formUrl === "" ){
+  if (!Client.validate_input_field(formUrlField) ){
     // wrong url format
     return;
   }
+  var formUrl = formUrlField.value;
   var response = await sentiment_analysis_get(formUrl, 'url');
   document.getElementById('results').innerHTML = JSON.stringify(response);
 }

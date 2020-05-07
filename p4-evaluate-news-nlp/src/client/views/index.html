@@ -3,40 +3,39 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Test</title>
+  <title>Sentiment Analysis for Text and URLs</title>
 </head>
 
 <body>
 
   <header>
-    <div class="">
-      Logo
-    </div>
-    <div class="">
-      navigation
+    <div class="title">
+      Sentiment Analysis for Text and URLs
     </div>
   </header>
 
   <main>
     <section>
       <form class="">
-        <!-- onblur="Client.onBlur()"  -->
+        <label id="input_string_label" for="input_string"></label>
         <input id="input_string" type="text" name="input" value="" placeholder="Enter Text">
-        <input type="submit" name="" value="Submit Text" onclick="return Client.handleSubmitText(event)">
+        <input class="submit_button" type="submit" name="" value="Submit Text" onclick="return Client.handleSubmitText(event)">
       </form>
       <form class="">
+        <label id="input_url_label" for="input_url"></label>
         <input id="input_url" type="url" name="input" value="" placeholder="Enter URL">
-        <input type="submit" name="" value="Submit URL" onclick="return Client.handleSubmitUrl(event)">
+        <input class="submit_button" type="submit" name="" value="Submit URL" onclick="return Client.handleSubmitUrl(event)">
       </form>
     </section>
-    <section>
-      <strong>Form Results:</strong>
-      <div id="results"></div>
+    <section class="results_section">
+      <strong>Sentiment Analysis:</strong>
+      <div id="results">Hello
+      </div>
     </section>
   </main>
 
   <footer>
-    <p>This is a footer</p>
+    <p>Powered By <a href="https://aylien.com/">AYLIEN.com</a></p>
   </footer>
 
 </body>

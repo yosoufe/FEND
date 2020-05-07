@@ -12,7 +12,7 @@ test('test aylien_wrapper env variables', () => {
   expect(process.env.API_KEY).not.toBeUndefined();
 });
 
-test('server_sentiment_analysis_text', async () => {
+test('server sentiment_analysis text', async () => {
   const aylien_wrapper = init_aylien_wrapper_test();
   var data = {
     text: "some text",
@@ -23,7 +23,7 @@ test('server_sentiment_analysis_text', async () => {
   console.log(response);
 });
 
-test('server_sentiment_analysis_url', async () => {
+test('server sentiment_analysis url', async () => {
   const aylien_wrapper = init_aylien_wrapper_test();
   var data = {
     url: "https://docs.aylien.com/textapi/endpoints/#traversing-taxonomies"
