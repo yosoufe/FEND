@@ -29,7 +29,7 @@ Functionality wise, website does a sentiment analysis on text or a url, using [a
     We are using `dotenv` to read this file and use the aylien api.
 * To build and run the server you may use the following command
   ```
-  reset ; npm run build-prod; printf "\n\nBUILD COMPLETE\n\n" ; npm run start
+  reset && npm run build-prod && printf "\n\nBUILD COMPLETE\n\n" && npm run start
   ```
   Now the website should be available on the port number that is shown on terminal.
 * We are using `jest` as a unit test platform. You need the `.env` file for tests as well.
