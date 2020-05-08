@@ -16,7 +16,7 @@ async function handleSubmitUrl(event) {
   event.preventDefault();
 
   // check what text was put into the form field
-  var formUrlField = document.getElementById('input_url')
+  var formUrlField = document.getElementById('input_url');
   if (!Client.validate_input_field(formUrlField) ){
     // wrong url format
     return;

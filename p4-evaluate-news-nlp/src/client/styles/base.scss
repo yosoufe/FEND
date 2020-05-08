@@ -2,18 +2,24 @@
     // outline: yellow 1px solid;
 }
 
+:root{
+    --background_elements: rgba(226, 226, 226, 0.8);
+}
+
 body {
     display: flex;
     flex-direction: column;
     display: flex;
     min-height: 100vh;
-    background: rgb(136,203,171);
-    background: linear-gradient(45deg, rgb(88, 131, 110) 0%, rgb(3, 36, 155) 100%);
+    // background: rgb(136,203,171);
+    // background: linear-gradient(45deg, rgb(88, 131, 110) 0%, rgb(3, 36, 155) 100%);
+    background-image: url(//unsplash.it/1000/1000);
+    background-size: cover;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     
     main {
         flex: 2;
-        margin: 0px 25px;
+        margin: 25px 25px;
         outline: 5px solid black;
     
         section {
@@ -22,7 +28,9 @@ body {
 
             &.results_section{
                 font-size: 180%;
-                color: #eee;
+                background-color: var(--background_elements);
+                padding: 10px;
+                border-radius: 15px;
             }
         
             #results{
