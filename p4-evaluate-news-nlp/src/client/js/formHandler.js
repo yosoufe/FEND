@@ -51,11 +51,11 @@ async function sentiment_analysis_get(input_text, input_type) {
   return response;
 }
 
-function prepareResultsText(date){
-  var resultString = `Polarity: ${date['polarity']}`+
-  `\nPolarity Confidence: ${date['polarity_confidence']}`+
-  `\nSubjectivity: ${date['subjectivity']}` +
-  `\nSubjectivity Confidence: ${date['subjectivity_confidence']}`
+function prepareResultsText(data){
+  var resultString = `Polarity: ${data['polarity']}`+
+  `\nPolarity Confidence: ${data['polarity_confidence']}`+
+  `\nSubjectivity: ${data['subjectivity']}` +
+  `\nSubjectivity Confidence: ${data['subjectivity_confidence']}`
   return resultString;
 }
 
