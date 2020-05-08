@@ -9,7 +9,7 @@ async function handleSubmitText(event) {
   
   var formText = formTextField.value;
   var response = await sentiment_analysis_get(formText, 'text');
-  document.getElementById('results').innerHTML = JSON.stringify(response);
+  document.getElementById('results').innerHTML = prepareResultsText(response);
 }
 
 async function handleSubmitUrl(event) {
@@ -23,7 +23,7 @@ async function handleSubmitUrl(event) {
   }
   var formUrl = formUrlField.value;
   var response = await sentiment_analysis_get(formUrl, 'url');
-  document.getElementById('results').innerHTML = JSON.stringify(response);
+  document.getElementById('results').innerHTML = prepareResultsText(response);
 }
 
 
@@ -51,8 +51,17 @@ async function sentiment_analysis_get(input_text, input_type) {
   return response;
 }
 
+function prepareResultsText(date){
+  var resultString = `Polarity: ${date['polarity']}`+
+  `\nPolarity Confidence: ${date['polarity_confidence']}`+
+  `\nSubjectivity: ${date['subjectivity']}` +
+  `\nSubjectivity Confidence: ${date['subjectivity_confidence']}`
+  return resultString;
+}
+
 export {
   handleSubmitText,
   handleSubmitUrl,
-  sentiment_analysis_get
+  sentiment_analysis_get,
+  prepareResultsText
 }
